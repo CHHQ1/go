@@ -1,0 +1,77 @@
+package main
+
+import (
+	"fmt"
+	"runtime"
+	"unicode/utf8"
+)
+
+func plus(a int, b int) int {
+	// Go 需要明确的 return，也就是说，
+	// 它不会自动 return 最后一个表达式的值
+	return a + b
+}
+
+func plusPlus(a, b, c int) int {
+	return a + b + c
+}
+
+func main() {
+
+	res := plus(1, 2)
+	fmt.Println("1+2 =", res)
+
+	res = plusPlus(1, 2, 3)
+	fmt.Println("1+2+3 =", res)
+
+	fmt.Printf("Go版本号:%s\n", runtime.Version())
+
+	println("Hello", "world")
+	println("こんにちは 世界")
+
+	myarr := [...]int{1, 2, 3}
+	for id, it := range myarr {
+		fmt.Printf("No.%d = %d\n", id, it)
+	}
+
+	fmt.Printf("%d 的类型是: %T\n", myarr[0:2], myarr[0:2])
+
+	str := "Golang字符串"
+	fmt.Printf("Length of str as in byte:%d\n", len(str))
+
+	for n, it := range []byte(str) {
+		fmt.Printf("%c", it)
+
+		if n == len(str)-1 {
+			fmt.Printf("\n")
+		}
+	}
+
+	fmt.Printf("Length of str as in rune:%d\n", utf8.RuneCountInString(str))
+	fmt.Println("这里的序号会跳跃着count")
+	for _, it := range str {
+		fmt.Printf("%c", it)
+	}
+	fmt.Println() // 故意空行
+
+	for n, it := range str {
+		fmt.Printf("%d:%c\n", n, it)
+	}
+	fmt.Println("虽然也能得到完整字符串")
+
+	fmt.Printf("Length of str as in rune:%d\n", len([]rune(str)))
+	// for n, it := range str {
+	for n, it := range []rune(str) {
+		// fmt.Printf("%d:%c\n", n, it)
+		fmt.Printf("%c", it)
+
+		if n == utf8.RuneCountInString(str)-1 {
+			fmt.Printf("\n")
+		}
+	}
+
+	// 切片练习
+	a := []float64{1, 3.2, 4, 7.9}
+	fmt.Println(a)
+
+}
